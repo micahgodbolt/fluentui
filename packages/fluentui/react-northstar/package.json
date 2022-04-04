@@ -40,9 +40,9 @@
     "@types/simulant": "^0.2.0",
     "csstype": "^3.0.2",
     "faker": "^4.1.0",
-    "fela-tools": "^10.6.1",
+    "fela-tools": "^12.0.2",
     "gulp": "^4.0.2",
-    "jest-react-fela": "^10.6.1",
+    "jest-react-fela": "^12.0.2",
     "lerna-alias": "^3.0.3-0",
     "qs": "^6.8.0",
     "simulant": "^0.2.2"
