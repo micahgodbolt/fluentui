@@ -3,6 +3,33 @@ import * as React from 'react';
 import type { FluentProviderState } from './FluentProvider.types';
 import { fluentProviderClassNames } from './useFluentProviderStyles';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useInsertionEffect = (React as any)['useInsertion' + 'Effect'];
+
+const createStyleTag = (target: Document | undefined, id: string) => {
+  if (!target) {
+    return undefined;
+  }
+  const tag = target.createElement('style');
+  tag.setAttribute('id', id);
+  target.head.appendChild(tag);
+  return tag;
+};
+
+const insertSheet = (tag: HTMLStyleElement, rule: string) => {
+  const sheet = tag.sheet;
+
+  if (sheet) {
+    if (sheet.cssRules.length > 0) {
+      sheet.deleteRule(0);
+    }
+    sheet.insertRule(rule, 0);
+  } else if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line no-console
+    console.error('FluentProvider: No sheet available on styleTag, styles will not be inserted into DOM.');
+  }
+};
+
 /**
  * Writes a theme as css variables in a style tag on the provided targetDocument as a rule applied to a CSS class
  *
@@ -10,18 +37,13 @@ import { fluentProviderClassNames } from './useFluentProviderStyles';
  */
 export const useFluentProviderThemeStyleTag = (options: Pick<FluentProviderState, 'theme' | 'targetDocument'>) => {
   const { targetDocument, theme } = options;
+  const styleTag = React.useRef<HTMLStyleElement>();
 
   const styleTagId = useId(fluentProviderClassNames.root);
-  const styleTag = React.useMemo(() => {
-    if (!targetDocument) {
-      return null;
-    }
 
-    const tag = targetDocument.createElement('style');
-    tag.setAttribute('id', styleTagId);
-    targetDocument.head.appendChild(tag);
-    return tag;
-  }, [styleTagId, targetDocument]);
+  if (!useInsertionEffect) {
+    styleTag.current = createStyleTag(targetDocument, styleTagId);
+  }
 
   const cssRule = React.useMemo(() => {
     const cssVarsAsString = theme
@@ -34,30 +56,28 @@ export const useFluentProviderThemeStyleTag = (options: Pick<FluentProviderState
     // result: .fluent-provider1 { --css-var: '#fff' }
     return `.${styleTagId} { ${cssVarsAsString} }`;
   }, [theme, styleTagId]);
+
   const previousCssRule = usePrevious(cssRule);
 
-  if (styleTag && previousCssRule !== cssRule) {
-    const sheet = styleTag.sheet;
-
-    if (sheet) {
-      if (sheet.cssRules.length > 0) {
-        sheet.deleteRule(0);
-      }
-      sheet.insertRule(cssRule, 0);
-    } else if (process.env.NODE_ENV !== 'production') {
-      // eslint-disable-next-line no-console
-      console.error('FluentProvider: No sheet available on styleTag, styles will not be inserted into DOM.');
-    }
+  // insert cssRule into HTML tag if it exists
+  if (styleTag.current && previousCssRule !== cssRule) {
+    insertSheet(styleTag.current, cssRule);
   }
 
+  const useEffect = useInsertionEffect || React.useEffect;
+
   // Removes the style tag from the targetDocument on unmount or change
-  React.useEffect(() => {
+  useEffect(() => {
+    if (useInsertionEffect && targetDocument) {
+      styleTag.current = createStyleTag(document, styleTagId);
+      styleTag.current && insertSheet(styleTag.current, cssRule);
+    }
     return () => {
-      if (styleTag) {
-        styleTag.remove();
+      if (styleTag.current) {
+        styleTag.current.remove();
       }
     };
-  }, [styleTag]);
+  }, [cssRule, styleTagId, targetDocument]);
 
   return styleTagId;
 };
