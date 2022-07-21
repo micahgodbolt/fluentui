@@ -68,8 +68,8 @@ export const useFluentProviderThemeStyleTag = (options: Pick<FluentProviderState
 
   // Removes the style tag from the targetDocument on unmount or change
   useEffect(() => {
-    if (useInsertionEffect && targetDocument) {
-      styleTag.current = createStyleTag(document, styleTagId);
+    if (useInsertionEffect) {
+      styleTag.current = createStyleTag(targetDocument, styleTagId);
       styleTag.current && insertSheet(styleTag.current, cssRule);
     }
     return () => {
