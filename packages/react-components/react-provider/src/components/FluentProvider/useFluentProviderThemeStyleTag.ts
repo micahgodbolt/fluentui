@@ -4,7 +4,7 @@ import type { FluentProviderState } from './FluentProvider.types';
 import { fluentProviderClassNames } from './useFluentProviderStyles';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useInsertionEffect = (React as any)['useInsertion' + 'Effect'];
+const useInsertionEffect = (React as any).useInsertionEffect;
 
 const createStyleTag = (target: Document | undefined, id: string) => {
   if (!target) {
