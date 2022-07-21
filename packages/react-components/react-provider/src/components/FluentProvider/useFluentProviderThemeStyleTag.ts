@@ -41,10 +41,6 @@ export const useFluentProviderThemeStyleTag = (options: Pick<FluentProviderState
 
   const styleTagId = useId(fluentProviderClassNames.root);
 
-  if (!useInsertionEffect) {
-    styleTag.current = createStyleTag(targetDocument, styleTagId);
-  }
-
   const cssRule = React.useMemo(() => {
     const cssVarsAsString = theme
       ? (Object.keys(theme) as (keyof typeof theme)[]).reduce((cssVarRule, cssVar) => {
@@ -57,17 +53,21 @@ export const useFluentProviderThemeStyleTag = (options: Pick<FluentProviderState
     return `.${styleTagId} { ${cssVarsAsString} }`;
   }, [theme, styleTagId]);
 
-  const previousCssRule = usePrevious(cssRule);
+  const ruleIsNew = usePrevious(cssRule) !== cssRule;
+
+  // React 16/17 Behavior
+  if (!useInsertionEffect && ruleIsNew) {
+    styleTag.current = createStyleTag(targetDocument, styleTagId);
+    styleTag.current && insertSheet(styleTag.current, cssRule);
+  }
 
   // insert cssRule into HTML tag if it exists
-  if (styleTag.current && previousCssRule !== cssRule) {
-    insertSheet(styleTag.current, cssRule);
-  }
 
   const useEffect = useInsertionEffect || React.useEffect;
 
   // Removes the style tag from the targetDocument on unmount or change
   useEffect(() => {
+    // React 18+ behavior
     if (useInsertionEffect) {
       styleTag.current = createStyleTag(targetDocument, styleTagId);
       styleTag.current && insertSheet(styleTag.current, cssRule);
