@@ -53,10 +53,8 @@ export const useFluentProviderThemeStyleTag = (options: Pick<FluentProviderState
     return `.${styleTagId} { ${cssVarsAsString} }`;
   }, [theme, styleTagId]);
 
-  const ruleIsNew = usePrevious(cssRule) !== cssRule;
-
   // React 16/17 Behavior
-  if (!useInsertionEffect && ruleIsNew) {
+  if (usePrevious(cssRule) !== cssRule && !useInsertionEffect) {
     styleTag.current = createStyleTag(targetDocument, styleTagId);
     styleTag.current && insertSheet(styleTag.current, cssRule);
   }
