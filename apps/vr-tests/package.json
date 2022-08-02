@@ -14,7 +14,9 @@
     "start": "just-scripts dev:storybook"
   },
   "devDependencies": {
-    "@fluentui/eslint-plugin": "*"
+    "@fluentui/eslint-plugin": "*",
+    "@types/react": "18.0.14",
+    "@types/react-dom": "18.0.6"
   },
   "dependencies": {
     "@fluentui/example-data": "^8.4.1",
@@ -25,8 +27,8 @@
     "@fluentui/react-icons-mdl2": "^1.3.14",
     "@fluentui/scripts": "^1.0.0",
     "@fluentui/storybook": "^1.0.0",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "screener-storybook": "0.23.0",
     "tslib": "^2.1.0"
   }
