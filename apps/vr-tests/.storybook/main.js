@@ -13,6 +13,10 @@ module.exports = {
     reactDocgen: false,
   },
   webpackFinal: config => {
+    config.resolve.alias = {
+      // react: path.resolve(__dirname, '../node_modules/react'),
+      // 'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+    };
     return custom(config);
   },
   addons: ['@storybook/addon-actions'],

@@ -89,6 +89,7 @@ module.exports = config => {
       // Use the aliases for react-examples since the examples and demo may depend on some things
       // that the package itself doesn't (and it will include the aliases for all the package's deps)
       ...getResolveAlias(false, path.join(findGitRoot(), 'packages/react-examples')),
+      ...config.resolve.alias,
     },
   };
 
