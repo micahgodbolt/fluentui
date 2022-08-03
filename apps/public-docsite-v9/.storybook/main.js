@@ -13,12 +13,12 @@ module.exports = /** @type {Omit<import('../../../.storybook/main'), 'typescript
   staticDirs: ['../public'],
   addons: [...rootMain.addons],
   webpackFinal: (config, options) => {
-    const localConfig = { ...rootMain.webpackFinal(config, options) };
-
-    localConfig.resolve.alias = {
+    config.resolve.alias = {
       react: path.resolve(__dirname, '../node_modules/react'),
       'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
     };
+
+    const localConfig = { ...rootMain.webpackFinal(config, options) };
 
     // add your own webpack tweaks if needed
 
