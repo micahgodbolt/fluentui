@@ -288,9 +288,7 @@
       "@fluentui/web-components/ts-node/**",
       "@fluentui/web-components/webpack",
       "@fluentui/vr-tests/react",
-      "@fluentui/vr-tests/react-dom",
-      "@fluentui/public-docsite-v9/react",
-      "@fluentui/public-docsite-v9/react-dom"
+      "@fluentui/vr-tests/react-dom"
     ]
   },
   "resolutions": {
