@@ -250,6 +250,11 @@
       "projectType": "application",
       "implicitDependencies": []
     },
+    "@fluentui/storybook-react-18": {
+      "root": "apps/storybook-react-18",
+      "projectType": "application",
+      "implicitDependencies": []
+    },
     "@fluentui/react": {
       "root": "packages/react",
       "projectType": "library",

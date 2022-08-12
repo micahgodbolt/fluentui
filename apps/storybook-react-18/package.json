@@ -1,0 +1,28 @@
+{
+  "name": "@fluentui/storybook-react-18",
+  "description": "Storybook in React 18 test application",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "just-scripts build",
+    "lint": "just-scripts lint",
+    "test": "just-scripts test",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "start": "yarn storybook",
+    "storybook": "start-storybook --port 3000 --no-manager-cache"
+  },
+  "devDependencies": {
+    "@fluentui/eslint-plugin": "*",
+    "@fluentui/scripts": "^1.0.0",
+    "@types/react": "18.0.14",
+    "@types/react-dom": "18.0.6"
+  },
+  "dependencies": {
+    "@fluentui/react-components": "9.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tslib": "^2.1.0"
+  }
+}
