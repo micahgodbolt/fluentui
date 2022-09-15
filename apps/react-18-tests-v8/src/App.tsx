@@ -26,11 +26,6 @@ export const App = () => {
   const [isLight, { toggle: toggleIsLight }] = useBoolean(true);
 
   const ToggleButton: React.FunctionComponent = () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore typing error caused by monorepo being on @types/react version 17 and this app being on react 18.
-    // Seems to be caused by certain v8 components (like Button) still being class components.
-    // Error goes away when monorepo is migrated to react 18 types OR when @fluentui/react increases peer dependency
-    // range to include react 18.
     return <DefaultButton onClick={toggleIsLight}>Toggle theme</DefaultButton>;
   };
 
