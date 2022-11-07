@@ -4,7 +4,7 @@ export const TestDiv: React.FC<{
   styles: Record<string, string>;
   children: React.ReactNode;
 }> = ({ styles, children }) => {
-  const spanArray = [...Array(10).keys()];
+  const spanArray = [...Array(20).keys()];
   return (
     <div className={styles.outer}>
       {spanArray.map((item, i) => {

@@ -3,14 +3,13 @@ import { makeStyles } from '@griffel/react';
 import { ReactSelectorTreeComponentRenderer } from '../../shared/react/types';
 import { TestDiv, getMyStyles } from './utils';
 
-const myStyles = getMyStyles(1, 10);
+const myStyles = getMyStyles(0);
 
-const getStyles = makeStyles(myStyles);
-
-console.log(myStyles);
+const useStyles = makeStyles(myStyles);
 
 const componentRenderer: ReactSelectorTreeComponentRenderer = (node, depth, index) => {
-  const styles = getStyles();
+  const styles = useStyles();
+
   return (
     <TestDiv styles={styles}>
       {node.value.name}, {depth} {index}
