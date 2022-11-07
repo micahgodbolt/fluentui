@@ -1,13 +1,20 @@
 import * as React from 'react';
+import { makeStyles } from '@griffel/react';
 import { ReactSelectorTreeComponentRenderer } from '../../shared/react/types';
+import { TestDiv, getMyStyles } from './utils';
+
+const myStyles = getMyStyles(1, 10);
+
+const getStyles = makeStyles(myStyles);
+
+console.log(myStyles);
 
 const componentRenderer: ReactSelectorTreeComponentRenderer = (node, depth, index) => {
+  const styles = getStyles();
   return (
-    <div>
-      <span style={{ color: 'green', backgroundColor: 'red' }}>
-        {node.value.name}, ${index}
-      </span>
-    </div>
+    <TestDiv styles={styles}>
+      {node.value.name}, {depth} {index}
+    </TestDiv>
   );
 };
 

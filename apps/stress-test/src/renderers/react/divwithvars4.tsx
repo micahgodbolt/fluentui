@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { makeStyles } from '@griffel/react';
 import { ReactSelectorTreeComponentRenderer } from '../../shared/react/types';
-import { num } from '../../consts';
-const itemsArray = [...Array(num).keys()];
+const itemsArray = [...Array(1).keys()];
 const spanArray = [...Array(10).keys()];
 
 const myStyles = itemsArray.reduce(
@@ -12,18 +11,6 @@ const myStyles = itemsArray.reduce(
       backgroundColor: `var(--backgroundColor-${n})`,
       fontSize: `var(--fontSize-${n})`,
       lineHeight: `var(--lineHeight-${n})`,
-      marginTop: `var(--marginTop-${n})`,
-      marginBottom: `var(--marginBottom-${n})`,
-      marginLeft: `var(--marginLeft-${n})`,
-      marginRight: `var(--marginRight-${n})`,
-      paddingTop: `var(--paddingTop-${n})`,
-      paddingBottom: `var(--paddingBottom-${n})`,
-      paddingLeft: `var(--paddingLeft-${n})`,
-      paddingRight: `var(--paddingRight-${n})`,
-      top: `var(--top-${n})`,
-      bottom: `var(--bottom-${n})`,
-      left: `var(--left-${n})`,
-      right: `var(--right-${n})`,
     };
     acc.outer = {
       ...(acc.outer || {}),
@@ -31,18 +18,6 @@ const myStyles = itemsArray.reduce(
       [`--backgroundColor-${n}`]: `rgb(${n * 1},${150 - n * 1},0)`,
       [`--fontSize-${n}`]: `${4 + n}px`,
       [`--lineHeight-${n}`]: `${12 + n}px`,
-      [`--marginTop-${n}`]: `${1 + n}px`,
-      [`--marginBottom-${n}`]: `${2 + n}px`,
-      [`--marginLeft-${n}`]: `${3 + n}px`,
-      [`--marginRight-${n}`]: `${4 + n}px`,
-      [`--paddingTop-${n}`]: `${1 + n}px`,
-      [`--paddingBottom-${n}`]: `${2 + n}px`,
-      [`--paddingLeft-${n}`]: `${3 + n}px`,
-      [`--paddingRight-${n}`]: `${4 + n}px`,
-      [`--top-${n}`]: `${1 + n}px`,
-      [`--bottom-${n}`]: `${2 + n}px`,
-      [`--left-${n}`]: `${3 + n}px`,
-      [`--right-${n}`]: `${4 + n}px`,
     };
     return acc;
   },
