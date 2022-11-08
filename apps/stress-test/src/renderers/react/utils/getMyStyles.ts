@@ -7,21 +7,22 @@ export const getMyStyles = (vars: number = 1, items: number = 20) => {
       const cutoff = (vars - item) / 10;
 
       acc[`inner${item}`] = {
-        color: cutoff > 0 ? `var(--color-${item}, --color-global-${item})` : `var( --color-global-${item})`,
-        bg: cutoff > 1 ? `var(--bg-${item}, --bg-global-${item})` : `var( --bg-global-${item})`,
-        fontSize: cutoff > 2 ? `var(--fontSize-${item}, --fontSize-global-${item})` : `var( --fontSize-global-${item})`,
-        lineHeight: cutoff > 3 ? `var(--lh-${item}, --lh-global-${item})` : `var( --lh-global-${item})`,
-        marginTop: cutoff > 4 ? `var(--mt-${item}, --mt-global-${item})` : `var( --mt-global-${item})`,
-        marginBottom: cutoff > 5 ? `var(--mb-${item}, --mb-global-${item})` : `var( --mb-global-${item})`,
-        marginLeft: cutoff > 6 ? `var(--ml-${item}, --ml-global-${item})` : `var( --ml-global-${item})`,
-        marginRight: cutoff > 7 ? `var(--mr-${item}, --mr-global-${item})` : `var( --mr-global-${item})`,
-        paddingTop: cutoff > 8 ? `var(--pt-${item}, --pt-global-${item})` : `var( --pt-global-${item})`,
-        paddingBottom: cutoff > 9 ? `var(--pb-${item}, --pb-global-${item})` : `var( --pb-global-${item})`,
+        color: cutoff > 0 ? `var(--color-${item}, var(--color-global-${item}))` : `var( --color-global-${item})`,
+        backgroundColor: cutoff > 1 ? `var(--bg-${item}, var(--bg-global-${item}))` : `var( --bg-global-${item})`,
+        fontSize:
+          cutoff > 2 ? `var(--fontSize-${item}, var(--fontSize-global-${item}))` : `var( --fontSize-global-${item})`,
+        lineHeight: cutoff > 3 ? `var(--lh-${item}, var(--lh-global-${item}))` : `var( --lh-global-${item})`,
+        marginTop: cutoff > 4 ? `var(--mt-${item}, var(--mt-global-${item}))` : `var( --mt-global-${item})`,
+        marginBottom: cutoff > 5 ? `var(--mb-${item}, var(--mb-global-${item}))` : `var( --mb-global-${item})`,
+        marginLeft: cutoff > 6 ? `var(--ml-${item}, var(--ml-global-${item}))` : `var( --ml-global-${item})`,
+        marginRight: cutoff > 7 ? `var(--mr-${item}, var(--mr-global-${item}))` : `var( --mr-global-${item})`,
+        paddingTop: cutoff > 8 ? `var(--pt-${item}, var(--pt-global-${item}))` : `var( --pt-global-${item})`,
+        paddingBottom: cutoff > 9 ? `var(--pb-${item}, var(--pb-global-${item}))` : `var( --pb-global-${item})`,
       };
 
       const baseOuterStyles = {
-        [`--color-${item}`]: `rgb(255,${item}, ${random()})`,
-        [`--bg-${item}`]: `rgb(${item * 1},${random()},${random()})})`,
+        [`--color-${item}`]: `rgb(255,${item}, ${random()} )`,
+        [`--bg-${item}`]: `rgb(${item * 1},${random()},${random()})`,
         [`--fontSize-${item}`]: `${8 + item / 2}px`,
         [`--lh-${item}`]: `${12 + item}px`,
         [`--mt-${item}`]: `${1 + item}px`,

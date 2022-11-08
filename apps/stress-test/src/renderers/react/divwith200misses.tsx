@@ -1,20 +1,17 @@
 import * as React from 'react';
-import { makeStyles, makeResetStyles } from '@griffel/react';
+import { makeStyles } from '@griffel/react';
 import { ReactSelectorTreeComponentRenderer } from '../../shared/react/types';
 import { TestDiv, getMyStyles } from './utils';
 
 const myStyles = getMyStyles(200);
 
-const useOuter = makeResetStyles(myStyles.outer);
-
 const useStyles = makeStyles(myStyles);
 
 const componentRenderer: ReactSelectorTreeComponentRenderer = (node, depth, index) => {
   const styles = useStyles();
-  const outer = useOuter();
-
+  styles.outer = '';
   return (
-    <TestDiv className={outer} styles={styles}>
+    <TestDiv styles={styles}>
       {node.value.name}, {depth} {index}
     </TestDiv>
   );

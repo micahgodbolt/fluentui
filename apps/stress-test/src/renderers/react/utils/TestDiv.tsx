@@ -3,10 +3,11 @@ import * as React from 'react';
 export const TestDiv: React.FC<{
   styles: Record<string, string>;
   children: React.ReactNode;
-}> = ({ styles, children }) => {
+  className?: string;
+}> = ({ styles, children, className }) => {
   const spanArray = [...Array(20).keys()];
   return (
-    <div className={styles.outer}>
+    <div className={` ${className ? className : styles.outer}`}>
       {spanArray.map((item, i) => {
         return (
           <span key={item} className={styles[`inner${i}`]}>
