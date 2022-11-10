@@ -33,15 +33,33 @@ export const getMyStyles = (vars: number = 1, items: number = 20) => {
         [`--pb-${item}`]: `${2 + item}px`,
       };
 
-      // 34
-      const outerStyles = Object.keys(baseOuterStyles).reduce<Record<string, string>>((styleAcc, style, i) => {
-        if (i >= (vars - item) / 10) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const baseOuterClasses: Record<string, string>[] = [
+        { color: `rgb(255,${item}, ${random()} )` },
+        { backgroundColor: `rgb(${item * 1},${random()},${random()})` },
+        { fontSize: `${9 + item / 2}px` },
+        { lineHeight: `${13 + item}px` },
+        { marginTop: `${2 + item}px` },
+        { marginBottom: `${3 + item}px` },
+        { marginLeft: `${4 + item}px` },
+        { marginRight: `${5 + item}px` },
+        { paddingTop: `${2 + item}px` },
+        { paddingBottom: `${3 + item}px` },
+      ];
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const outerStyles = Object.keys(baseOuterStyles).reduce<Record<string, any>>((styleAcc, style, i) => {
+        if (i < (vars - item) / 10) {
+          styleAcc[style] = baseOuterStyles[style];
+          return styleAcc;
+        } else {
+          styleAcc[`& > :nth-child(${item + 1})`] = {
+            ...styleAcc[`& > :nth-child(${item + 1})`],
+            ...baseOuterClasses[i],
+          };
           return styleAcc;
         }
-        styleAcc[style] = baseOuterStyles[style];
-        return styleAcc;
       }, {});
-
       acc.outer = {
         ...(acc.outer || {}),
         ...outerStyles,
